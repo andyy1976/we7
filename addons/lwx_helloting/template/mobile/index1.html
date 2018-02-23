@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="format-detection" content="telephone=no, email=no" />
+    <title>HELLO★汀</title>
+    <link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/Swiper/3.4.2/css/swiper.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/index.min.css">
+</head>
+<body>
+<!-- head layout -->
+<div class="index-box">
+    <!-- 	<section class="header-images">
+        </section> -->
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            {loop $advlist $adv}
+            <div class="swiper-slide">
+                <!-- <img height="100%" width="100%" src="../addons/lwx_helloting/template/mobile/public/images/img01.jpg" alt=""> -->
+                <img width="100%" style="vertical-align: middle;" src="http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$adv['thumb']}"/>
+            </div>
+            {/loop}
+        </div>
+        <div class="swiper-pagination"></div>
+    </div>
+    <!-- 幻灯片 -->
+    <!-- {loop $advlist $adv}
+    <img src="{$_W['attachurl']}{$adv['thumb']}"/>
+    {/loop} -->
+    <nav>
+        <div class="nav-box">
+            <div class="nav-item nav-active" data-nav="01">推荐</div>
+            <div class="nav-item" data-nav="02">PO图</div>
+            <div class="nav-item" data-nav="03">时髦开箱</div>
+            <div class="nav-item" data-nav="04">颜究所</div>
+            <div class="nav-item" data-nav="05">直播间</div>
+            <!-- <div class="nav-item" data-nav="06">备用</div> -->
+        </div>
+    </nav>
+    <!-- 推荐  -->
+    <div class="them-box message-info info__01">
+        {loop $tj_list $item}
+        <section class="theme-recommend" data-id="{$item['id']}">
+            <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+                <div class="them-show">
+                    <!--{if $item['thumb_url'][0] == ""}
+                    <div class="js-photo" style="background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']}) no-repeat 50% 50% / cover;width: 100%;"></div>
+                    {else}-->
+                    <div class="js-photo" style="background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']}) no-repeat 50% 50% / cover;width: 100%;"></div>
+                    <!--{/if}-->
+                    {if $item['ishot']==1}
+                    <div class="them-show__left them-show__hot"></div>
+                    {/if}
+                    {if $item['isnew']==1}
+                    <div class="them-show__left them-show__new"></div>
+                    {/if}
+                </div>
+                <div class="them-title">{$item['title']}</div>
+            </div>
+            <div class="them-operation">
+                <div class="them-operation__pp"><em>品牌资讯</em><span>|</span><em>朗文斯汀</em></div>
+
+                <div class="them-operation__gn">
+
+                    <div class="gn-item js-dz">
+                        {if $item[iflike] == 1}
+                        <img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt=""><span>{$item['likeno']}</span>
+                        {else}
+                        <img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt=""><span>{$item['likeno']}</span>
+                        {/if}
+                    </div>
+
+                    <div class="gn-item"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span>{$item['commentno']}</span></div>
+                </div>
+            </div>
+        </section>
+        {/loop}
+    </div>
+    <!-- PO图 -->
+    <div class="them-box message-info info__02">
+        {loop $po_list $item}
+        <section class="theme-recommend" data-id="{$item['id']}">
+            <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+                <div class="them-show">
+
+                    {if $item['thumb_url'][0] == ""}
+                    <div class="js-photo" style="background:url(../addons/lwx_helloting/template/mobile/public/images/common_icon_picture.png) no-repeat 50% 50% / cover;width: 100%;"></div>
+                    {else}
+                    <div class="js-photo" style="background:url(../attachment/{$item['thumb_url'][0]}) no-repeat 50% 50% / cover;width: 100%;"></div>
+                    {/if}
+                    {if $item['ishot']==1}
+                    <div class="them-show__left them-show__hot"></div>
+                    {/if}
+                    {if $item['isnew']==1}
+                    <div class="them-show__left them-show__new"></div>
+                    {/if}
+                </div>
+                <div class="them-title">{$item['title']}</div>
+            </div>
+            <div class="them-operation">
+                <div class="them-operation__pp"><em>PO图</em><span>|</span><em>{if empty($item['nickname'])}朗文斯汀{else}{$item['nickname']}{/if}</em></div>
+                <div class="them-operation__gn">
+                    <div class="gn-item js-dz">
+
+                        {if $item[iflike] == 1}
+                        <img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt=""><span>{$item['likeno']}</span>
+                        {else}
+                        <img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt=""><span>{$item['likeno']}</span>
+                        {/if}
+                    </div>
+                    <div class="gn-item"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span>{$item['commentno']}</span></div>
+                </div>
+            </div>
+        </section>
+        {/loop}
+    </div>
+    <!-- 时髦开箱 -->
+    <div class="them-box message-info info__03">
+        {loop $box_list $item}
+        <section class="theme-recommend" data-id="{$item['id']}">
+            <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+                <div class="them-show">
+
+
+                    <div class="js-photo" style="background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']}) no-repeat 50% 50% / cover;width: 100%;"></div>
+
+                    {if $item['ishot']==1}
+                    <div class="them-show__left them-show__hot"></div>
+                    {/if}
+                    {if $item['isnew']==1}
+                    <div class="them-show__left them-show__new"></div>
+                    {/if}
+                </div>
+                <div class="them-title">{$item['title']}</div>
+            </div>
+            <div class="them-operation">
+                <div class="them-operation__pp"><em>时髦开箱</em><span>|</span><em>朗文斯汀</em></div>
+                <div class="them-operation__gn">
+                    <div class="gn-item js-dz">
+                        {if $item[iflike] == 1}
+                        <img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt=""><span>{$item['likeno']}</span>
+                        {else}
+                        <img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt=""><span>{$item['likeno']}</span>
+                        {/if}
+                    </div>
+                    <div class="gn-item"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span>{$item['commentno']}</span></div>
+                </div>
+            </div>
+        </section>
+        {/loop}
+    </div>
+    <!-- 颜究所 -->
+    <div class="them-box message-info info__04">
+        {loop $themelist $theme}
+        <section class="theme-recommend" data-id="{$theme['id']}">
+            <!-- 是否有下级
+            有下级，进入 {php echo $this->createMobileUrl('feedback', array('op'=>'train','id'=>$theme['id']));}
+            无下级，进入{php echo $this->createMobileUrl('feedback', array('op'=>'train_video_list','id'=>$theme['id'],'type'=>'pcate'));}
+            -->
+            <div class="them-box__bd ih-href"
+                 {if $theme['havachid']==0}
+            data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'train_list','id'=>$theme['id'],'type'=>'pcate'));}";
+            {else}
+            data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'train','id'=>$theme['id']));} "
+            {/if}
+            >
+            <div class="them-show">
+                <div class="js-photo" style="background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$theme['thumb']}) no-repeat 50% 50% / cover;width: 100%;"></div>
+            </div>
+            <div class="them-title">
+                {$theme['name']}</div>
+    </div>
+    </section>
+    {/loop}
+
+    <!-- 		<section class="theme-recommend" >
+                <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'train_video_list'));}">
+                    <div class="them-show">
+                        <div class="js-photo" style="background:url(../addons/lwx_helloting/template/mobile/public/images/pxsp.jpg) no-repeat 50% 50% / cover;width: 100%;"></div>
+                    </div>
+                    <div class="them-title">培训视频</div>
+                </div>
+            </section> -->
+</div>
+<!--直播间  -->
+<div class="them-box message-info info__05">
+    {loop $play_list $item}
+    <section class="theme-recommend" data-id="{$item['id']}">
+        <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+            <div class="them-show">
+
+
+                <div class="js-photo" style="background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']}) no-repeat 50% 50% / cover;width: 100%;"></div>
+                {if $item['ishot']==1}
+                <div class="them-show__left them-show__hot"></div>
+                {/if}
+                {if $item['isnew']==1}
+                <div class="them-show__left them-show__new"></div>
+                {/if}
+            </div>
+            <div class="them-title">{$item['title']}</div>
+        </div>
+        <div class="them-operation">
+            <div class="them-operation__pp"><em>品牌资讯</em><span>|</span><em>朗文斯汀</em></div>
+            <div class="them-operation__gn">
+
+
+                <div class="gn-item js-dz">
+                    {if $item[iflike] == 1}
+                    <img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt=""><span>{$item['likeno']}</span>
+                    {else}
+                    <img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt=""><span>{$item['likeno']}</span>
+                    {/if}
+                </div>
+
+                <div class="gn-item"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span>{$item['commentno']}</span></div>
+            </div>
+        </div>
+    </section>
+    {/loop}
+</div>
+<!-- 备用 -->
+<div class="them-box message-info info__06">
+    {loop $by_list $item}
+    <section class="theme-recommend" data-id="{$item['id']}">
+        <div class="them-box__bd ih-href" data-href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+            <div class="them-show">
+
+                {if $item['thumb_url'][0] == ""}
+                <div class="js-photo" style="background:url(../addons/lwx_helloting/template/mobile/public/images/common_icon_picture.png) no-repeat 50% 50% / cover;width: 100%;"></div>
+                {else}
+                <div class="js-photo" style="background:url(../attachment/{$item['thumb_url'][0]}) no-repeat 50% 50% / cover;width: 100%;"></div>
+                {/if}
+                {if $item['ishot']==1}
+                <div class="them-show__left them-show__hot"></div>
+                {/if}
+                {if $item['isnew']==1}
+                <div class="them-show__left them-show__new"></div>
+                {/if}
+            </div>
+            <div class="them-title">{$item['title']}</div>
+        </div>
+        <div class="them-operation">
+            <div class="them-operation__pp"><em>品牌资讯</em><span>|</span><em>朗文斯汀</em></div>
+            <div class="them-operation__gn">
+
+                <div class="gn-item js-dz">
+                    {if $item[iflike] == 1}
+                    <img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png"><span>{$item['likeno']}</span>
+                    {else}
+                    <img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png"><span>{$item['likeno']}</span>
+                    {/if}
+                </div>
+                <div class="gn-item"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span>{$item['commentno']}</span></div>
+            </div>
+        </div>
+    </section>
+    {/loop}
+</div>
+</div>
+
+
+<!-- foot layout -->
+<footer>
+    <div class="footer-but ih-href" data-href="{php echo $this->createMobileUrl('feedback');}">
+        <img class="footer__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_home_n.png" alt="">
+        <img class="footer-active__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_home_s.png" alt="">
+        <div>主页</div>
+    </div>
+    <div class="footer-but ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'message'));}">
+        <img class="footer__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_message_n.png" alt="">
+        <img class="footer-active__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_message_s.png" alt="">
+        <div>消息</div>
+    </div>
+    <div class="footer-but release-info ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'publish'));}">
+        <img src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_release.png" alt="">
+    </div>
+    <div class="footer-but ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'myTing'));}">
+        <img class="footer__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_form_n.png" alt="">
+        <img class="footer-active__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_form_s.png" alt="">
+        <div>我★汀</div>
+    </div>
+    <div class="footer-but ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'me'));}">
+        <img class="footer__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_me_n.png" alt="">
+        <img class="footer-active__image" src="../addons/lwx_helloting/template/mobile/public/images/common_nav_btn_me_s.png" alt="">
+        <div>我</div>
+    </div>
+</footer>
+
+
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+<script src="https://cdn.bootcss.com/Swiper/3.4.2/js/swiper.jquery.min.js"></script>
+<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+
+<script type="text/javascript">
+    ;(function($) {
+        $(".footer-but").eq(0).addClass("footer-active");
+
+        $(".footer-but").on("tap", function() {
+            location.href = $(this).data("href");
+        });
+
+        // 自适应合理宽高
+        var bl = 380/710;	// iphone 6 倍率
+
+        // 手机宽度 - 留白宽度 = 图片宽度
+        var phoneWidth = $("body").width();
+        var paddingWidth = 20;
+        var imagesWidth = phoneWidth - paddingWidth;
+
+        // 图片宽度 * 宽高倍率 = 图片高度
+        var imagesHight = imagesWidth * bl;
+        $(".them-show .js-photo").height(imagesHight);
+
+        // banner height
+        // var bannerbl = 320/750;
+        // var bannerHight = phoneWidth * bannerbl
+        // $(".swiper-slide img").height(bannerHight);
+
+        var bodyh = $("body").height();
+        $(".swiper-container").height(bodyh - 49);
+
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: 5000,//可选选项，自动滑动
+            loop : true,
+            pagination : '.swiper-pagination',
+        });
+
+        // 点赞
+
+        $(".js-dz").off("tap", ".js-dz-n").on("tap", ".js-dz-n", function() {
+            var _self = $(this);
+            var _id = _self.parents(".theme-recommend").data("id");
+            var _num = _self.siblings("span").html();
+
+            $.ajax({
+                url: "{php echo $this->createMobileUrl('list',array('op'=>'addnotelike'));}",
+                data: {
+                    id: _id
+                },
+                type: "get",
+                success: function(result) {
+                    if (result == 1) {
+                        var num = parseInt(_num) + 1;
+                        var html = '<img class="js-dz-s" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt=""><span>'+num+'</span>';
+                        _self.parent().html(html);
+
+                    } else {
+                        console.log("点赞失败");
+                    }
+                }
+            })
+        });
+
+        // 取消点赞
+
+        $(".js-dz").off("tap", ".js-dz-s").on("tap", ".js-dz-s", function() {
+            var _self = $(this);
+            var _id = _self.parents(".theme-recommend").data("id");
+            var _num = _self.siblings("span").html();
+
+            $.ajax({
+                url: "{php echo $this->createMobileUrl('list',array('op'=>'chalenotelike'));}",
+                data: {
+                    id: _id
+                },
+                type: "get",
+                success: function(result) {
+                    if (result == 1) {
+                        var num = parseInt(_num) - 1;
+                        var html = '<img class="js-dz-n" src="../addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt=""><span>'+num+'</span>';
+                        _self.parent().html(html);
+
+                    } else {
+                        console.log("取消点赞失败");
+                    }
+                }
+            })
+        });
+
+
+    })(Zepto)
+</script>
+
+<script src="../addons/lwx_helloting/template/mobile/public/js/message.js"></script>
+
+</body>
+</html>

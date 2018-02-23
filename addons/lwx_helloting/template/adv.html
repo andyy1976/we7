@@ -1,0 +1,85 @@
+{template 'common/header'}
+{template 'common'}
+<ul class="nav nav-tabs">
+	<li {if $operation == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl('adv',array('op' =>'display'))}">幻灯片</a></li>
+	<li{if empty($adv['id']) && $operation == 'post'} class="active" {/if}><a href="{php echo $this->createWebUrl('adv',array('op' =>'post'))}">添加幻灯片</a></li>
+	{if !empty($adv['id']) &&  $operation == 'post'}<li  class="active"><a href="{php echo $this->createWebUrl('adv',array('op' =>'post','id'=>$adv['id']))}">编辑幻灯片</a></li>{/if}
+</ul>
+
+{if $operation == 'display'}
+<div class="main panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:10%;">ID</th>
+					<th style="width:75%;">图片</th>
+
+					<th  style="width:10%;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $adv}
+				<tr>
+					<td>{$adv['id']}</td>
+
+					<td><img width="160px;" height="160px;" src="../attachment/{$adv['thumb']}"></td>
+				 <!--  <td>{$adv['link']}</td> -->  
+					<td style="text-align:left;">
+						<a href="{php echo $this->createWebUrl('adv', array('op' => 'post', 'id' => $adv['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="修改"><i class="fa fa-edit"></i></a>
+						<a href="{php echo $this->createWebUrl('adv', array('op' => 'delete', 'id' => $adv['id']))}"class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-times"></i></a>
+					</td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').hover(function(){
+			$(this).tooltip('show');
+		},function(){
+			$(this).tooltip('hide');
+		});
+	});
+</script>
+{elseif $operation == 'post'}
+
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>
+		<input type="hidden" name="id" value="{$adv['id']}" />
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				幻灯片设置
+			</div>
+			<div class="panel-body">
+			  
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">幻灯片图片</label>
+					<div class="col-sm-9 col-xs-12">
+						{php echo tpl_form_field_image('thumb', $adv['thumb'])}
+					</div>
+				</div>
+				   <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">幻灯片连接</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="link" class="form-control" value="{$adv['link']}" />
+					</div>
+				</div> 
+				 
+			</div>
+		</div>
+<div class="form-group col-sm-12">
+	<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />
+	<input type="hidden" name="token" value="{$_W['token']}" />
+	</div>
+	</form>
+</div>
+
+<script language='javascript'>
+	 
+</script>
+{/if}
+{template 'common/footer'}

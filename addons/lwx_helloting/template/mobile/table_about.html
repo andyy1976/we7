@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="">
+    <style>
+        .box{
+            width:100%;
+            height:auto;
+            overflow: hidden;
+        }
+        .box h1{
+            font-size:0.3rem;
+            color:#000;
+            width:100%;
+            height:0.6rem;
+            padding-left:0.3rem;
+            line-height:0.6rem;
+        }
+        .box ul{
+            width:100%;
+            height:auto;
+            overflow: hidden;
+        }
+        .box ul li{
+            width:100%;
+            height:0.5rem;
+            font-size:0.24rem;
+            line-height:0.5rem;
+            padding-left:0.5rem;
+        }
+        .trouble h2{
+            width:100%;
+            height:0.6rem;
+            font-weight:bold;
+            color:#000;
+            font-size:0.34rem;
+            padding-left:0.3rem;
+        }
+        .img{
+            width:90%;
+            height:3rem;
+            background:red;
+            margin:0.3rem auto;
+        }
+        .img img{
+            width:100%;
+            height:100%;
+        }
+        .font{
+            width:90%;
+            height:auto;
+            font-size:0.24rem;
+            margin:0.3rem auto;
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        // 这里的640 取决于设计稿的宽度
+                        docEl.style.fontSize = '100px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/table_about.css">
+    <title>反馈表详情</title>
+</head>
+<body>
+
+
+
+    {loop $List $item}
+    <section class="box">
+        <h1><span>{$item['createtime']}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+            <span>{if $type==1}新货{/if}{if $type==2}开业{/if}{if $type==3}店铺{/if}{if $type==4}质量{/if}反馈</span></h1>
+        <ul>
+            {if empty($item['season'])}{else}<li>季度: <span>{$item['year']}年{$item['season']}</span></li>{/if}
+            {if empty($item['quality'])}{else}<li>服装质量: <span>{$item['quality']}星</span></li>{/if}
+            {if empty($item['style'])}{else}<li>季度款式: <span>{$item['style']}星</span></li>{/if}
+            {if empty($item['status'])}{else}<li>销售情况:<span>{$item['status']}星</span></li>{/if}
+
+            {if empty($item['shopname'])}{else}<li>店铺名字:<span>{$item['shopname']}</span></li>{/if}
+            {if empty($item['opentime'])}{else}<li>开业时间:<span>{$item['opentime']}</span></li>{/if}
+            {if empty($item['shopphone'])}{else}<li>店铺电话:<span>{$item['shopphone']}</span></li>{/if}
+            {if empty($item['finishtime'])}{else}<li>完成时间:<span>{$item['finishtime']}</span></li>{/if}
+            {if empty($item['finishtimescore'])}{else}<li>完成时间打分:<span>{$item['finishtimescore']}</span></li>{/if}
+            {if empty($item['peixun'])}{else}<li>培训状态:<span>{$item['peixun']}</span></li>{/if}
+            {if empty($item['peixunscore'])}{else}<li>人员培训打分:<span>{$item['peixunscore']}</span></li>{/if}
+            {if empty($item['cuxiaohd'])}{else}<li>采纳的促销活动:<span>{$item['cuxiaohd']}</span></li>{/if}
+            {if empty($item['cuxiaolp'])}{else}<li>促销礼品:<span>{$item['cuxiaolp']}</span></li>{/if}
+            {if empty($item['cuxiao'])}{else}<li>促销活动状态:<span>{$item['cuxiao']}</span></li>{/if}
+            {if empty($item['cuxiaoscore'])}{else}<li>促销活动打分:<span>{$item['cuxiaoscore']}</span></li>{/if}
+            {if empty($item['huopin'])}{else}<li>货品状态:<span>{$item['huopin']}</span></li>{/if}
+            {if empty($item['sdhp'])}{else}<li>收到货品状态:<span>{$item['sdhp']}</span></li>{/if}
+            {if empty($item['hpwzx'])}{else}<li>货品完整性:<span>{$item['hpwzx']}</span></li>{/if}
+            {if empty($item['hpclxg'])}{else}<li>货品陈列效果:<span>{$item['hpclxg']}</span></li>{/if}
+            {if empty($item['hpqkscore'])}{else}<li>货品情况打分:<span>{$item['hpqkscore']}</span></li>{/if}
+            {if empty($item['jlbx'])}{else}<li>经理表现状态:<span>{$item['jlbx']}</span></li>{/if}
+            {if empty($item['jlbxscore'])}{else}<li>经理表现打分:<span>{$item['jlbxscore']}</span></li>{/if}
+            {if empty($item['jlcljj'])}{else}<li>经理陈列讲解:<span>{$item['jlcljj']}</span></li>{/if}
+            {if empty($item['jlfwzd'])}{else}<li>经理服务指导:<span>{$item['jlfwzd']}</span></li>{/if}
+            {if empty($item['dpbhzd'])}{else}<li>店铺补货指导:<span>{$item['dpbhzd']}</span></li>{/if}
+            {if empty($item['dpglzd'])}{else}<li>店铺管理指导:<span>{$item['dpglzd']}</span></li>{/if}
+
+            {if empty($item['area'])}{else}<li>面积:<span>{$item['area']}</span></li>{/if}
+            {if empty($item['manager'])}{else}<li>区域经理:<span>{$item['manager']}</span></li>{/if}
+            {if empty($item['designer'])}{else}<li>设计师:<span>{$item['designer']}</span></li>{/if}
+            {if empty($item['dxbj'])}{else}<li>动线布局合理:<span>{$item['dxbj']}</span></li>{/if}
+            {if empty($item['ghl'])}{else}<li>挂货量是否合理:<span>{$item['ghl']}</span></li>{/if}
+            {if empty($item['xgt'])}{else}<li>效果图是否完整:<span>{$item['xgt']}</span></li>{/if}
+            {if empty($item['sgt'])}{else}<li>施工图是否完整:<span>{$item['sgt']}</span></li>{/if}
+            {if empty($item['djqd'])}{else}<li>道具清单是否完整:<span>{$item['djqd']}</span></li>{/if}
+            {if empty($item['tzsj'])}{else}<li>图纸设计是否及时:<span>{$item['tzsj']}</span></li>{/if}
+            {if empty($item['djfh'])}{else}<li>道具发货是否及时:<span>{$item['djfh']}</span></li>{/if}
+            {if empty($item['sjsfw'])}{else}<li>设计师服务满意度:<span>{$item['sjsfw']}</span></li>{/if}
+            {if empty($item['gcjlfw'])}{else}<li>工程监理服务满意度:<span>{$item['gcjlfw']}</span></li>{/if}
+            {if empty($item['jysm'])}{else}<li>建议说明:<span>{$item['jysm']}</span></li>{/if}
+
+        </ul>
+        {if empty($item['problem'])}{else}
+        <section class="trouble">
+            {loop $item['problem'] $item1}
+            {if empty($item1['img'])}{else}
+            <div class="img">
+                <img src="http://h5.lwest.cn/we7/attachment/lwx_helloting/{$item1['img']}" alt="">
+            </div>
+            {/if}
+            <div class="font">{$item1['text']}
+            </div>
+            {/loop}
+        </section>
+        {/if}
+    </section>
+    {/loop}
+
+
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+</script>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>{$title}</title>
+	<link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+	
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/train.min.css">
+
+</head>
+<body>
+	<!-- head layout -->
+	
+
+	
+<div class="ih-box ih-box__train">
+
+{loop $notelist $note}
+<!--4  手册进detail  5 视频进train_detail页面   -->
+{if $note['cateid']==4}
+<div class="ih-box__item ih-href" data-href="{php echo $this->createMobileUrl('list', array('op'=>'noteDetail','id'=>$note['id']));}">
+{else}
+<div class="ih-box__item ih-href" data-href="{php echo $this->createMobileUrl('feedback', array('op'=>'train_detail','id'=>$note['id']));}">
+{/if}
+  
+		<div class="ih-box__hd">
+			<div class="ih-border__image">
+				<div style="background-image:url(http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/{$note['thumb']});background-size:100%;background-repeat:no-repeat;background-position:center;height: 100%;"></div>
+			</div>
+		</div>
+		<div class="ih-box__bd">
+			<p class="ih-bd__title" style="height: 42px;">{$note['title']}</p>
+			<div class="ih-bd__content">
+        <div class="ih-bd__content_fd">{if $note['cateid']==4}培训手册/朗文斯汀{else}培训视频/朗文斯汀{/if}</div>
+        <div class="ih-bd__content_bd"><img src="../addons/lwx_helloting/template/mobile/public/images/look.png" alt=""><span>{$note['readno']}</span></div>
+      </div>
+		</div>
+	</div>
+{/loop}
+</div>
+
+
+	
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+
+	
+<script>
+  ;(function($) {
+
+  })(Zepto)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,141 @@
+ 			<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">标题</label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						<input type="text" name="title" class="form-control" value="{$adv['title']}" />
+
+					</div>
+
+				</div>
+				
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">状态</label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						<input type="text"   class="form-control" readonly="readonly" value="{if $adv['ifpb']==1}未屏蔽{else}已屏蔽{/if}" />
+
+					</div>
+
+				</div>
+ 
+				<div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">封面图片</label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						{php echo tpl_form_field_image('thumb', $adv['thumb'])}
+
+					</div>
+
+				</div>
+
+			 
+				
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">内容</label>
+					<div class="col-sm-9 col-xs-12">
+						{php echo tpl_ueditor('content', $adv['content']);}
+					</div>
+				</div>
+			
+			<!-- 是否最新 是否最热 -->
+		<div class="col-sm-9 col-xs-12">
+			<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="isnew" value="1" id="isnew" 
+			 {if !empty($adv) && $adv['isnew'] == 1}checked="true"{/if} /> 最新</label>
+			 	<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="isnew" value="2" id="isnew" 
+			 {if !empty($adv) && $adv['isnew'] == 2}checked="true"{/if} /> 不是最新</label>
+
+		</div>
+ 		<div class="col-sm-9 col-xs-12">
+
+			<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="ishot" value="1" id="isnew" 
+			 {if !empty($adv) && $adv['ishot'] == 1}checked="true"{/if} /> 最热</label>
+			 	<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="ishot" value="2" id="isnew" 
+			 {if !empty($adv) && $adv['ishot'] == 2}checked="true"{/if} /> 不是最热</label>
+
+		</div>
+		<!-- 是否推荐 -->
+			<div class="col-sm-9 col-xs-12">
+
+			<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="jstj" value="1" id="isnew" 
+			 {if !empty($adv) && $adv['jstj'] == 1}checked="true"{/if} />推荐</label>
+			 	<label for="totalcnf3" class="radio-inline">
+			<input type="radio" name="jstj" value="2" id="isnew" 
+			 {if !empty($adv) && $adv['jstj'] == 2}checked="true"{/if} />不推荐</label>
+
+		</div>
+		
+				 
+				<!-- 分类1推荐 2po图 3时髦开箱 4颜究所-分类1  5颜究所-分类2  -->
+				<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">所属分类</label>
+
+					<div class="col-sm-9 col-xs-12">
+						 <select name="cateid"  class="form-control">
+						 	<option value="2" {if $adv['cateid']==2 } selected="selected"{/if}>po图</option>
+						 	<option value="3" {if $adv['cateid']==3 } selected="selected"{/if}>时髦开箱</option>
+						 	<option value="4" {if $adv['cateid']==4 } selected="selected"{/if}>培训手册</option>
+						 	<option value="5" {if $adv['cateid']==5 } selected="selected"{/if}>培训视频</option>
+						 	<option value="6" {if $adv['cateid']==6 } selected="selected"{/if}>直播间</option>
+						 </select>
+					</div>
+				</div>
+				<!-- 专题  研究所  培训手册  -->
+				<div class="form-group">
+			
+				<label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style='color:red'>*</span>分类</label>
+			
+				<div class="col-sm-8 col-xs-12">
+			
+					{php echo tpl_form_field_category_2level('category', $parent, $children, $adv['pcate'], $adv['ccate'])}
+			
+				</div>
+			
+			</div>
+				<!-- 视频连接 -->
+				
+			  <div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">视频连接</label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						<input type="text" name="video_url" class="form-control" value="{$adv['video_url']}" />
+
+					</div>
+
+				</div>
+				<!-- pdf  <input type="file" name="file" value="{$play['url']}">  -->
+				  <div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">pdf </label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						<input type="file" name="file" class="form-control" value="{$adv['pdf_url']}" />
+
+					</div>
+
+				</div>
+				<!-- pdf中文名称 -->
+				  <div class="form-group">
+
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">pdf中文名称 </label>
+
+					<div class="col-sm-9 col-xs-12">
+
+						<input type="text" name="pdf_name" class="form-control" value="{$adv['pdf_name']}" />
+
+					</div>
+
+				</div>

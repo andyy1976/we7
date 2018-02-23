@@ -1,0 +1,529 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		  content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/new/js/common.js"></script>
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/new/css/common.css">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/new/css/index.css">
+	<title>HELLO★汀</title>
+</head>
+<body class="iphonex">
+<section class="box">
+	<div class="scrolls">
+		<div class="zhuti">
+			<!--轮播-->
+			<div class="swiper-container swiper1">
+				<div class="swiper-wrapper">
+					{loop $advlist $adv}
+					<div class="swiper-slide">
+						<a href="{$adv['link']}">
+							<img src="http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/20171129/thumb5a1e5e01e8181.jpg" alt="">
+						</a>
+					</div>
+					{/loop}
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+			<!--导航-->
+			<nav class="one">
+				<div class="box">
+					<a class="two active" href="#">汀荐</a>
+					<a class="two active2" href="#">汀图</a>
+					<a class="two active3" href="#">汀向标</a>
+					<a class="two active4" href="#">汀颜馆</a>
+					<a class="two active5" href="#">汀直播</a>
+				</div>
+			</nav>
+			<!--/*********推荐-->
+
+			<div class="content-box">
+				<ul class="list list_one" data-id="1">
+					{loop $tj_list $item}
+					<li>
+						<div class="img" style="background-image:url({$item['thumb']})" data-id="{$item['id']}">
+							<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+								{if $item['ishot']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">
+								{/if}
+								{if $item['isnew']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">
+								{/if}
+							</a>
+						</div>
+						<div class="title">{$item['title']}</div>
+						<div class="message">
+							{if $item['cateid']==2}
+							<span>汀图</span>
+							{else}
+							<span>汀向标</span>
+							{/if}
+							<span>|</span>
+							{if empty($item['nickname'])}
+							<span>朗文斯汀 {$item['iflike']}</span>
+							{else}
+							{$item['nickname']}
+							{/if}
+							<span class="mes_num">{$item['commentno']}</span>
+							<img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt="">
+							<span class="good_num">{$item['likeno']}</span>
+							{if $item['iflike'] == 1}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">
+							{else}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">
+							{/if}
+						</div>
+					</li>
+					{/loop}
+					<li class="load load_one">
+						loading......
+					</li>
+				</ul>
+
+				<!--/*********PO图-->
+				<ul class="list list_two" data-id="2">
+					{loop $po_list $item}
+					<li>
+						{if $item['thumb_url'][0] == ""}
+							<div class="img" style="background-image:url(../addons/lwx_helloting/template/mobile/public/images/common_icon_picture.png)" data-id="{$item['id']}">
+								<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+									{if $item['ishot']==1}
+									<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">
+									{/if}
+									{if $item['isnew']==1}
+									<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">
+									{/if}
+								</a>
+							</div>
+
+						{else}
+
+								<div class="img" style="background-image:url(../attachment/{$item['thumb_url'][0]})" data-id="{$item['id']}">
+									<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}" >
+									{if $item['ishot']==1}
+									<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">
+									{/if}
+									{if $item['isnew']==1}
+									<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">
+									{/if}
+									</a>
+								</div>
+
+						{/if}
+						<div class="title">{$item['title']}</div>
+						<div class="message">
+							<span>汀图</span>
+							<span>|</span>
+							{if empty($item['nickname'])}
+							<span>朗文斯汀</span>
+							{else}
+							{$item['nickname']}
+							{/if}
+							<span class="mes_num">{$item['commentno']}</span>
+							<img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt="">
+							<span class="good_num">{$item['likeno']}</span>
+
+							{if $item['iflike'] == 1}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">
+							{else}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">
+							{/if}
+
+						</div>
+					</li>
+					{/loop}
+					<li class="load load_two">
+						loading......
+					</li>
+				</ul>
+
+				<!--/*********汀向标-->
+				<ul class="list list_three" data-id="3">
+					{loop $box_list $item}
+					<li>
+						<div class="img" style="background-image:url(http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']})" data-id="{$item['id']}">
+							<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+								{if $item['ishot']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">
+								{/if}
+								{if $item['isnew']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">
+								{/if}
+							</a>
+						</div>
+
+						<div class="title">{$item['title']}</div>
+						<div class="message">
+							<span>汀向标</span>
+							<span>|</span>
+							{if empty($item['nickname'])}
+							<span>朗文斯汀</span>
+							{else}
+							{$item['nickname']}
+							{/if}
+							<span class="mes_num">{$item['commentno']}</span>
+							<img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt="">
+							<span class="good_num">{$item['likeno']}</span>
+							{if $item[iflike] == 1}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">
+							{else}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">
+							{/if}
+						</div>
+					</li>
+					{/loop}
+					<li class="load load_three">
+						loading......
+					</li>
+				</ul>
+
+
+				<!--/*********汀颜馆-->
+				<ul class="list">
+					{loop $themelist $theme}
+					<li>
+						<div class="img" style="background-image:url(http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/{$theme['thumb']})" data-id="$theme['id']">
+							<a {if $theme['havachid']==0}
+							href="{php echo $this->createMobileUrl('feedback', array('op'=>'train_list','id'=>$theme['id'],'type'=>'pcate'));}";
+							{else}
+							href="{php echo $this->createMobileUrl('feedback', array('op'=>'train','id'=>$theme['id']));} "
+							{/if}">
+							</a>
+						</div>
+
+						<div class="title">{$theme['name']}</div>
+					</li>
+					<li class="load load_four">
+						loading......
+					</li>
+					{/loop}
+				</ul>
+
+
+
+				<!--/*********汀直播-->
+				<ul class="list list_five" data-id="4">
+					{loop $play_list $item}
+					<li>
+						<div class="img" style="background-image:url(http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/{$item['thumb']})" data-id="{$item['id']}">
+							<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}">
+								{if $item['ishot']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">
+								{/if}
+								{if $item['isnew']==1}
+								<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">
+								{/if}
+							</a>
+						</div>
+
+						<div class="title">{$item['title']}</div>
+						<div class="message">
+							<span>品牌资讯</span>
+							<span>|</span>
+							<span>朗文斯汀</span>
+							<span class="mes_num">{$item['commentno']}</span>
+							<img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt="">
+							<span class="good_num">{$item['likeno']}</span>
+							{if $item[iflike] == 1}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">
+							{else}
+							<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">
+							{/if}
+						</div>
+					</li>
+					{/loop}
+					<li class="load load_five">
+						loading......
+					</li>
+				</ul>
+			</div>
+
+
+		</div>
+	</div>
+
+
+
+
+
+	<footer>
+		<div>
+			<a href="{php echo $this->createMobileUrl('feedback');}">
+				<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_nav_btn_home_s.png" alt="">
+				<span>首页</span>
+			</a>
+		</div>
+		<div>
+			<a href="{php echo $this->createMobileUrl('feedback', array('op'=>'message'));}">
+				<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_nav_btn_message_n.png" alt="">
+				<span>消息</span>
+			</a>
+		</div>
+		<div>
+			<a href="{php echo $this->createMobileUrl('feedback', array('op'=>'publish'));}">
+				<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_nav_btn_release.png" alt="">
+			</a>
+		</div>
+		<div>
+			<a href="{php echo $this->createMobileUrl('feedback', array('op'=>'myTing'));}">
+				<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_nav_btn_form_n.png" alt="">
+				<span>我★汀</span>
+			</a>
+		</div>
+		<div>
+			<a href="{php echo $this->createMobileUrl('feedback', array('op'=>'me'));}">
+				<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_nav_btn_me_n.png" alt="">
+				<span>我</span>
+			</a>
+		</div>
+	</footer>
+</section>
+</body>
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/new/css/swiper.min.css">
+<script src="../addons/lwx_helloting/template/mobile/public/new/js/swiper.min.js"></script>
+<script src="../addons/lwx_helloting/template/mobile/public/new/js/iscroll.js"></script>
+</html>
+
+<script>
+    //滚动
+    var swiper = new Swiper('.swiper-container', {
+        slidesPerView: 1,
+        loop: true,
+        autoplay:true,
+    });
+    //nav 选中状态
+    $(".two").each(function(index,value){
+        var i=index;
+        $(value).on("touchend",function(){
+            $(this).addClass("active");
+            $(this).siblings().removeClass("active");
+            $(".list").eq(i).show();
+            $(".list").eq(i).siblings().hide();
+            myScroll.refresh();
+        })
+    })
+    //滚动
+    var myScroll = new IScroll('.scrolls', {
+        mousewheel:true,
+        click:true,
+    });
+	//点赞
+	$(".list").delegate(".good","touchend",function(){
+	    var id=$(this).parents("li").children(".img").attr("data-id");
+	    var num=$(this).parents(".message").children(".good_num").html();
+	    var that=$(this);
+	    if(that.attr("src")=="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png"){
+            $.ajax({
+                url: "{php echo $this->createMobileUrl('list',array('op'=>'chalenotelike'));}",
+                data: {
+                    id: id
+                },
+                type: "get",
+                success: function(result) {
+                    if (result == 1) {
+                        var num_=parseInt(num) - 1;
+                        that.parents(".message").children(".good_num").html(num_);
+                        that.attr("src","http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png");
+                    } else {
+                        console.log("取消点赞失败");
+                    }
+                }
+            })
+		}else{
+            $.ajax({
+                url: "{php echo $this->createMobileUrl('list',array('op'=>'addnotelike'));}",
+                data: {
+                    id: id
+                },
+                type: "get",
+                success: function(result) {
+                    if (result == 1) {
+                        var num_=parseInt(num) + 1;
+                        that.parents(".message").children(".good_num").html(num_);
+                        that.attr("src","http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png");
+                    } else {
+                        console.log("点赞失败");
+                    }
+                }
+            })
+		}
+
+	})
+	//下拉刷新.html
+	var num=0;
+    myScroll.on('scrollEnd', function() {
+        $(".load").show();
+        myScroll.refresh();
+        if (this.y==this.absStartY ||this.y==this.absStartY-50) {
+            num++;
+            var data_id;
+            for(var i=0;i<$(".list").length;i++){
+                if($($(".list")[i]).css("display")=="block"){
+                    data_id=$($(".list")[i]).attr("data-id");
+                }
+            }
+            $.ajax({
+				url:"{php echo $this->createMobileUrl('feedback',array('op'=>'nextf5'));}",
+				data:{type:data_id,page:num},
+				dataType:"json",
+				type:"post",
+				success:function(data) {
+					if(data_id=="1") {
+                        for (var i = 0; i < data.length; i++) {
+                            var box = $("<li>");
+                            var img = $(`<div class='img' style="background-image:url(${data[i].thumb})" data-id="${data[i].id}"></div>`);
+                            var a = $(`<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}"></a>`);
+                            if (data[i].ishot == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">`);
+                            }
+                            if (data[i].isnew == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">`)
+                            }
+                            var title = $(`<div class="title">${data[i].title}</div>`);
+
+                            var message=$(`<div class="message"></div>`);
+
+                            if(data[i].cateid==2){
+                               var ting=$(`<span>汀图</span><span>|</span>`);
+							}else{
+                                var ting=$(`<span>汀向标</span><span>|</span>`);
+							}
+							if(data[i].nickname==""){
+                                var name=$(`<span>朗文斯汀</span></span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+							}else{
+                                var name=$(`<span>${data[i].nickname}</span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+							}
+							if(data[i].iflike==1){
+							    var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">`);
+							}else{
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">`);
+							}
+                            img.append(a);
+                            box.append(img);
+                            box.append(title);
+                            message.append(ting);
+                            message.append(name);
+                            message.append(like);
+                            box.append(message);
+                            $(".load_one").before(box);
+                        }
+                    }else if(data_id==2){
+                        for (var i = 0; i < data.length; i++) {
+                            var box = $("<li>");
+
+                            if(data[i].thumb_url[0]==""){
+                                var img = $(`<div class='img' style="background-image:url(../addons/lwx_helloting/template/mobile/public/images/common_icon_picture.png)" data-id="${data[i].id}"></div>`);
+                            }else{
+                                var img = $(`<div class='img' style="background-image:url(../attachment/${data[i].thumb_url[0]})" data-id="${data[i].id}"></div>`);
+                            }
+                            var a = $(`<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}"></a>`);
+                            if (data[i].ishot == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">`);
+                            }
+                            if (data[i].isnew == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">`)
+                            }
+                            var title = $(`<div class="title">${data[i].title}</div>`);
+
+                            var message=$(`<div class="message"></div>`);
+
+							var ting=$(`<span>汀图</span><span>|</span>`);
+
+                            if(data[i].nickname==""){
+                                var name=$(`<span>朗文斯汀</span></span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+                            }else{
+                                var name=$(`<span>${data[i].nickname}</span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+                            }
+                            if(data[i].iflike==1){
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">`);
+                            }else{
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">`);
+                            }
+                            img.append(a);
+                            message.append(ting);
+                            message.append(name);
+                            message.append(like);
+                            box.append(img);
+                            box.append(title);
+                            box.append(message);
+                            $(".load_two").before(box);
+                        }
+					}else if(data_id==3){
+                        for (var i = 0; i < data.length; i++) {
+                            var box = $("<li>");
+                            var img = $(`<div class='img' style="background-image:url(http://h5.lwest.cn/hellot_admin/thinkphp3/Public/uploads/${data[i].thumb})" data-id="${data[i].id}"></div>`);
+                            var a = $(`<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}"></a>`);
+                            if (data[i].ishot == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_hot.png" alt="" class="hot">`);
+                            }
+                            if (data[i].isnew == 1) {
+                                a.html(`<img src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_icon_new.png" alt="" class="new">`)
+                            }
+                            var title = $(`<div class="title">${data[i].title}</div>`);
+
+                            var message=$(`<div class="message"></div>`);
+
+                            if(data[i].cateid==2){
+                                var ting=$(`<span>汀图</span><span>|</span>`);
+                            }else{
+                                var ting=$(`<span>汀向标</span><span>|</span>`);
+                            }
+                            if(data[i].nickname==""){
+                                var name=$(`<span>朗文斯汀</span></span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+                            }else{
+                                var name=$(`<span>${data[i].nickname}</span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+                            }
+                            if(data[i].iflike==1){
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">`);
+                            }else{
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">`);
+                            }
+                            img.append(a);
+                            box.append(img);
+                            box.append(title);
+                            message.append(ting);
+                            message.append(name);
+                            message.append(like);
+                            box.append(message);
+                            $(".load_three").append(box);
+                        }
+					}else if(data_id==5){
+                        for (var i = 0; i < data.length; i++) {
+                            var box = $("<li>");
+                            var img = $(`<div class='img' style="background-image:url(${data[i].thumb})" data-id="${data[i].id}"></div>`);
+                            var a = $(`<a href="{php echo $this->createMobileUrl('list',array('op'=>'noteDetail','id'=>$item['id']));}"></a>`);
+
+                            var title = $(`<div class="title">${data[i].title}</div>`);
+
+                            var message=$(`<div class="message"></div>`);
+
+							var ting=$(`<span>品牌资讯</span><span>|</span>`);
+
+							var name=$(`<span>朗文斯汀</span></span><span class="mes_num">${data[i].commentno}</span><img class="mes" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""><span class="good_num">${data[i].likeno}</span>`);
+
+							if(data[i].iflike==1){
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_s.png" alt="">`);
+                            }else{
+                                var like=$(`<img class="good" src="http://h5.lwest.cn/we7/addons/lwx_helloting/template/mobile/public/images/common_btn_like_n.png" alt="">`);
+                            }
+                            img.append(a);
+                            box.append(img);
+                            box.append(title);
+                            message.append(ting);
+                            message.append(name);
+                            message.append(like);
+                            box.append(message);
+                            $(".load_five").before(box);
+                        }
+					}
+                    $(".load").hide();
+                    myScroll.refresh();
+                }
+
+			})
+        }
+    });
+</script>

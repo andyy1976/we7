@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开业满意度评分表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none; //去掉浏览器默认样式
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        // 这里的640 取决于设计稿的宽度
+                        docEl.style.fontSize = '100px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);recalc();
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/opening3.css">
+</head>
+<body>
+    <h1>开业宣传3/4</h1>
+    <div class="list_one">
+        <label>
+            <span>开业您采纳公司推荐的促销活动:</span>
+            <input type="text" placeholder="点击编辑" id="cuxiaohd">
+        </label>
+        <label>
+            <span>促销宣传品及礼品:</span>
+            <input type="text" placeholder="点击编辑" id="cuxiaolp">
+        </label>
+    </div>
+    <div class="list_two">
+        <label class="two">
+            <span class="one">促销活动</span>
+            <select name="" id="cuxiao" class="one">
+                <option value="100">点击打分</option>
+                <option value="0">开业前一周到</option>
+                <option value="1">开业前3天到</option>
+                <option value="2">开业前1天到</option>
+                <option value="3">开业当日或以后到</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">促销活动打分</span>
+            <select name="" id="cuxiaoscore" class="one">
+                <option value="100">点击打分</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">货品</span>
+            <select name="" id="huopin" class="one">
+                <option value="100">点击打分</option>
+                <option value="0">公司配发</option>
+                <option value="1">选货与公司推荐结合</option>
+                <option value="2">自主选货</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">收到货品</span>
+            <select name="" id="sdhp" class="one">
+                <option value="100">点击打分</option>
+                <option value="0">与订货吻合</option>
+                <option value="1">款式缺少</option>
+                <option value="2">断色断码</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">货品完整性</span>
+            <select name="" id="hpwzx" class="one">
+                <option value="100">点击打分</option>
+                <option value="0">上下内外多种搭配</option>
+                <option value="1">上下内外搭配单</option>
+                <option value="2">上下内外无法搭配</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">货品陈列效果</span>
+            <select name="" id="hpclxg" class="one">
+                <option value="100">点击打分</option>
+                <option value="0">色系丰满视觉效果好</option>
+                <option value="1">色系丰满视觉效果一般</option>
+                <option value="2">色系丰满视觉效果差</option>
+            </select>
+        </label>
+        <label class="two">
+            <span class="one">货品情况打分</span>
+            <select name="" id="hpqkscore" class="one">
+                <option value="100">点击打分</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+            </select>
+        </label>
+    </div>
+    <button class="button">下一步</button>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(".button").on("touchend",function(){
+        var cuxiaohd=$("#cuxiaohd").val();
+        var cuxiaolp=$("#cuxiaolp").val();
+        var cuxiao=$("#cuxiao").val();
+        var cuxiaoscore=$("#cuxiaoscore").val();
+        var huopin=$("#huopin").val();
+        var sdhp=$("#sdhp").val();
+        var hpwzx=$("#hpwzx").val();
+        var hpclxg=$("#hpclxg").val();
+        var hpqkscore=$("#hpqkscore").val();
+
+        if(cuxiaohd==""||cuxiaolp==""||cuxiao=="100"||cuxiaoscore=="100"||huopin=="100"||sdhp=="100"||hpwzx=="100"||hpclxg=="100"||hpqkscore=="100"){
+            $(this).attr("disabled",true);
+            alert("请完善信息");
+            return;
+        }
+
+        var c=[];
+        c=[cuxiaohd,cuxiaolp,cuxiao,cuxiaoscore,huopin,sdhp,hpwzx,hpclxg,hpqkscore];
+        sessionStorage.c=c;
+        window.location.href="http://h5.lwest.cn/we7/app/index.php?i=3&c=entry&op=opening4&do=feedback&m=lwx_helloting";
+    });
+</script>

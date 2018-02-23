@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="">
+    <style>
+        .box{
+            width:100%;
+            height:auto;
+            overflow: hidden;
+        }
+        .box h1{
+            font-size:0.3rem;
+            color:#000;
+            width:100%;
+            height:0.6rem;
+            padding-left:0.3rem;
+            line-height:0.6rem;
+        }
+        .box ul{
+            width:100%;
+            height:auto;
+            overflow: hidden;
+        }
+        .box ul li{
+            width:100%;
+            height:0.5rem;
+            font-size:0.24rem;
+            line-height:0.5rem;
+            padding-left:0.5rem;
+        }
+        .trouble h2{
+            width:100%;
+            height:0.6rem;
+            font-weight:bold;
+            color:#000;
+            font-size:0.34rem;
+            padding-left:0.3rem;
+        }
+        .img{
+            width:90%;
+            height:3rem;
+            background:red;
+            margin:0.3rem auto;
+        }
+        .img img{
+            width:100%;
+            height:100%;
+        }
+        .font{
+            width:90%;
+            height:auto;
+            font-size:0.24rem;
+            margin:0.3rem auto;
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        // 这里的640 取决于设计稿的宽度
+                        docEl.style.fontSize = '100px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/table_about.css">
+    <title>反馈表详情</title>
+</head>
+<body>
+
+<section class="trouble">
+    {loop $problem $item1}
+    <h2>问题<span>{$item1['num']}</span></h2>
+    <div class="img">
+        <img src="{$item1['img']}" alt="">
+    </div>
+    <div class="font">{$item1['text']}
+    </div>
+    {/loop}
+</section>
+
+    {loop $List $item}
+    <section class="box">
+        <h1><span>{$item['createtime']}</span>&nbsp;&nbsp;&nbsp;&nbsp;<span>{if $type==1}新货{/if}{if $type==3}店铺{/if}{if $type==4}质量{/if}反馈</span></h1>
+        <ul>
+            <li>季度: <span>2017年{if $item['season']==1}春{/if}{if $item['season']==2}夏{/if}{if $item['season']==3}秋{/if}{if $item['season']==4}冬{/if}季</span></li>
+            <li>服装质量: <span>{$item['quality']}星</span></li>
+            <li>季度款式: <span>{$item['style']}星</span></li>
+            <li>销售情况:<span>{$item['status']}星</span></li>
+        </ul>
+    </section>
+    {/loop}
+
+
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+
+</script>

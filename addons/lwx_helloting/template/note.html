@@ -1,0 +1,55 @@
+{template 'common/header'}
+{template 'common'}<script type="text/javascript" src="resource/js/lib/jquery-ui-1.10.3.min.js"></script><ul class="nav nav-tabs">	<li {if $operation == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl('note',array('op' =>'display'))}">帖子管理</a></li>	<li{if empty($adv['id']) && $operation == 'post'} class="active" {/if}><a href="{php echo $this->createWebUrl('note',array('op' =>'post'))}">添加帖子</a></li>	{if !empty($adv['id']) &&  $operation == 'post'} <li class="active"><a href="{php echo $this->createWebUrl('note',array('op'=>'post','id'=>$adv['id']))}">编辑帖子</a></li>{/if}</ul>
+{if $operation == 'display'}<div class="main panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:30px;">ID</th>					<th>标题</th>
+					<th>点赞数</th>
+					<th>评论数</th>					<!-- <th>打赏数</th> -->					<th>是否最新</th>					<th>是否最热</th>					<th>类型</th>
+					<th >操作</th>				</tr>
+			</thead>
+			<tbody>
+				{loop $list $adv}
+				<tr>
+					<td>{$adv['id']}</td>					<td>{$adv['title']}</td>
+				  <td>{$adv['likeno']}</td>  				<td>{$adv['commentno']}</td> 			  				  	 			    <td>{if $adv['isnew']==1}是{else}否{/if}</td> 				<td>{if $adv['ishot']==1}是{else}否{/if}</td>   				<!-- 1推荐 2po图 3时髦开箱 4颜究所-分类1  5颜究所-分类2 -->				 <td>{if $adv['cateid']==1}推荐 {elseif $adv['cateid']==2 }po图 {elseif $adv['cateid']==3}时髦开箱 					{elseif $adv['cateid']==4}培训手册 {elseif $adv['cateid']==5}培训视频 					{elseif $adv['cateid']==6}直播间  					{/if}				</td>								   
+					<td style="text-align:left;">						<a href="{php echo $this->createWebUrl('note', array('op' => 'post', 'id' => $adv['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="修改"><i class="fa fa-edit"></i></a>						<a href="{php echo $this->createWebUrl('note', array('op' => 'delete', 'id' => $adv['id']))}"class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-times"></i></a>
+					</td>
+				</tr>				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').hover(function(){
+			$(this).tooltip('show');
+		},function(){
+			$(this).tooltip('hide');
+		});
+	});
+</script>
+{elseif $operation == 'post'}
+<style type='text/css'>	.tab-pane {padding:20px 0 20px 0;}</style>
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()' enctype="multipart/form-data">
+		<input type="hidden" name="id" value="{$adv['id']}" />
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				帖子设置
+			</div>				<div class="panel-body">				<ul class="nav nav-tabs" id="myTab">					<li class="active" ><a href="#tab_basic">基本信息</a></li>					<li><a href="#tab_des">关联商品</a></li>				</ul>				<div class="tab-content">					<div class="tab-pane  active" id="tab_basic">{template 'note_basic'}</div>					<div class="tab-pane" id="tab_des">{template 'note_desc'}</div>				</div>			</div>	 </div>
+		 
+	<div class="form-group col-sm-12">
+	<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	{if $adv['ifpb']==1}	<a  class="btn btn-primary col-lg-1" onclick="pinbi();">屏蔽</a>	{else}    <a  class="btn btn-primary col-lg-1" onclick="chalepinbi();">取消屏蔽</a>	{/if}			
+	<input type="hidden" name="token" value="{$_W['token']}" />
+	</div>
+	</form>
+</div>
+<script language='javascript'>function pinbi(){	 $.ajax({         url: "{php echo $this->createWebUrl('note',array('op'=>'pingbi','id'=>$adv['id']));}",         type: "post",         data: {},         dataType: "json",         success: function(result) {       	  alert("屏蔽成功!");       	 location.reload();         }   });}function chalepinbi(){	 $.ajax({         url: "{php echo $this->createWebUrl('note',array('op'=>'chalepingbi','id'=>$adv['id']));}",         type: "post",         data: {},         dataType: "json",         success: function(result) {       	  alert("取消屏蔽成功!");       	 location.reload();         }   });}
+$(function () {	window.optionchanged = false;	$('#myTab a').click(function (e) {		e.preventDefault();//阻止a链接的跳转行为		$(this).tab('show');//显示当前选中的链接及关联的content	})});
+</script>
+{/if}
+{template 'common/footer'}

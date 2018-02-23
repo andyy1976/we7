@@ -1,0 +1,69 @@
+{template 'common/header'}
+{template 'common'}
+<ul class="nav nav-tabs">
+<li {if $operation == 'display'} class="active" {/if}><a href="{php echo $this->createWebUrl('shop_feedback',array('op' =>'display'))}">店铺设置</a></li>{if $operation == 'post'}<li  class="active"><a href="">详情</a></li> {/if}{if $operation == 'replylist'}<li  class="active"><a href="">详情</a></li> {/if}<li {if $operation == 'export'} class="active" {/if}><a href="{php echo $this->createWebUrl('shop_feedback',array('op' =>'export'))}">导出</a></li>
+
+</ul>
+
+{if $operation == 'display'}
+<div class="main panel panel-default">
+	<div class="panel-body table-responsive">
+		<table class="table table-hover">
+			<thead class="navbar-inner">
+				<tr>
+					<th style="width:30px;">ID</th>					<th>店铺名称</th>					<th>开业时间</th>
+					<th>质量评分</th>					<th>款式评分</th>					<th>销售评分</th>					<th>操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				{loop $list $adv}
+				<tr>
+					<td>{$adv['id']}</td>					<td>{$adv['shopname']}</td>				 	 <td>{$adv['opentime']}</td>  					<td>{$adv['quality']}</td>  					<td>{$adv['style']}</td>  					<td>{$adv['status']}</td>  					<td style="text-align:left;">						<a href="{php echo $this->createWebUrl('shop_feedback', array('op' => 'post', 'id' => $adv['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="查看详情"><i class="fa fa-edit"></i></a>						<a href="{php echo $this->createWebUrl('shop_feedback', array('op' => 'replylist', 'id' => $adv['id']))}" class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="查看对话列表"><i class="fa fa-edit"></i></a>						<!-- <a href="{php echo $this->createWebUrl('shop_feedback', array('op' => 'delete', 'id' => $adv['id']))}"class="btn btn-default btn-sm" data-toggle="tooltip" data-placement="top" title="删除"><i class="fa fa-times"></i></a>					 --></td>
+				</tr>
+				{/loop}
+			</tbody>
+		</table>
+		{$pager}
+	</div>
+</div>
+<script>
+	require(['bootstrap'],function($){
+		$('.btn').hover(function(){
+			$(this).tooltip('show');
+		},function(){
+			$(this).tooltip('hide');
+		});
+	});
+</script>
+{elseif $operation == 'post'}
+
+<div class="main">
+	<form action="" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>
+		<input type="hidden" name="id" value="{$adv['id']}" />
+		<div class="panel panel-default">
+			<div class="panel-heading">				详情
+			</div>
+			<div class="panel-body">				   <div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">店铺名字</label>
+					<div class="col-sm-9 col-xs-12">
+						<input type="text" name="link" class="form-control" value="{$adv['shopname']}" />
+					</div>
+				</div> 
+				 
+			</div>			<div class="form-group">					<label class="col-xs-12 col-sm-3 col-md-2 control-label">开业时间</label>					<div class="col-sm-9 col-xs-12">						<input type="text" name="link" class="form-control" value="{$adv['opentime']}" />					</div>				</div>					   <div class="form-group">					<label class="col-xs-12 col-sm-3 col-md-2 control-label">质量评分</label>					<div class="col-sm-9 col-xs-12">						<input type="text" name="link" class="form-control" value="{$adv['quality']}" />					</div>				</div>					   <div class="form-group">					<label class="col-xs-12 col-sm-3 col-md-2 control-label">款式评分</label>					<div class="col-sm-9 col-xs-12">						<input type="text" name="link" class="form-control" value="{$adv['style']}" />					</div>				</div>		        <div class="form-group">					<label class="col-xs-12 col-sm-3 col-md-2 control-label">销售评分</label>					<div class="col-sm-9 col-xs-12">						<input type="text" name="link" class="form-control" value="{$adv['status']}" />					</div>				</div> 				<div class="form-group">					<label class="col-xs-12 col-sm-3 col-md-2 control-label">内容</label>					<div class="col-sm-9 col-xs-12">							{loop $adv['problem'] $pro}				{$pro['text']}				<img src="../attachment/lwx_helloting/{$pro['img']}">				{/loop}					</div>				</div>				  			<br/><br/>			<div class="panel-heading">				回复			</div>			<div class="panel-body">				<form action="{php echo $this->createWebUrl('opening_feedback',array('op'=>'reply'));}" method="post" class="form-horizontal form" enctype="multipart/form-data" onsubmit='return formcheck()'>								<input type="hidden" name="id" value="{$adv['id']}" />				<input type="hidden" name="op" value="reply" />				 <div class="form-group">						<label class="col-xs-12 col-sm-3 col-md-2 control-label">内容</label>						<div class="col-sm-9 col-xs-12">							<input type="text" name="content" class="form-control"   />						</div>										</div>								<div class="form-group col-sm-12">									<input type="submit" name="submit" value="提交" class="btn btn-primary col-lg-1" />									<input type="hidden" name="token" value="{$_W['token']}" />									</div>				</form>			</div>
+		</div>
+
+	</form>
+</div>
+
+<script language='javascript'>
+	function formcheck() {
+		if ($("#advname").isEmpty()) {
+			Tip.focus("advname", "请填写幻灯片名称!");
+			return false;
+		}
+		return true;
+	}
+</script>{elseif $operation=='replylist'}对话列表		 <table>  <tr>    <th width="15%;">身份</th>    <th width="50%;">内容</th>     <th width="30%;">时间</th>  </tr>  {loop $replylist $reply}  <tr>    <td>{if $reply['status']==1}		客服回复		{else}		用户回复			{/if}		</td>    <td>{$reply['content']}</td>    <td>{php echo date('Y-m-d H:i：s',$reply['createtime']);}</td>  </tr>  {/loop}</table>
+{/if}
+{template 'common/footer'}

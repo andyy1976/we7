@@ -1,0 +1,14 @@
+ 			<div class="form-group">
+					<label class="col-xs-12 col-sm-3 col-md-2 control-label">关联商品</label>
+		
+					<div class="col-sm-9 col-xs-12">
+						 {loop $goodlist $good}
+						 <input type="checkbox" name="goodid[]" value="{$good['id']}"   {if $good['ifcheck'] =='checked'} checked="true" {/if}/>
+						 {$good['goodssn']} {$good['title']}
+						 <br/>
+						
+						 {/loop}	
+						 	</div>
+
+				</div>
+   

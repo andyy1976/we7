@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开业满意度评分表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none; //去掉浏览器默认样式
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        // 这里的640 取决于设计稿的宽度
+                        docEl.style.fontSize = '100px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/opening2.css">
+</head>
+<body>
+    <h1>督导/区域经理评价4/4</h1>
+    <label>
+        <span>督导/区域经理现场表现</span>
+        <select name="" id="jlbx" class="one">
+            <option value="">点击打分</option>
+            <option value="0">主动带领店铺员工布场</option>
+            <option value="1">在一旁观看店铺员工布场</option>
+            <option value="2">未参加布场</option>
+        </select>
+    </label>
+    <label>
+        <span>督导/区域经理现场表现打分</span>
+        <select name="" id="jlbxscore" class="one">
+            <option value="0">点击打分</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </label>
+    <label>
+        <span>督导/区域经理陈列讲解</span>
+        <select name="" id="jlclzd" class="one">
+            <option value="">点击打分</option>
+            <option value="0">多次讲解并与店员共同模拟实验</option>
+            <option value="1">简单讲解和示范</option>
+            <option value="2">口头讲解未现场示范</option>
+        </select>
+    </label>
+    <label>
+        <span>督导/区域经理服务指导</span>
+        <select name="" id="jlfwzd" class="one">
+            <option value="">点击打分</option>
+            <option value="0">示范并参与售卖</option>
+            <option value="1">示范未参与售卖</option>
+            <option value="2">口头指导</option>
+        </select>
+    </label>
+    <label>
+        <span>督导/区域经理店铺补货指导</span>
+        <select name="" id="dpbhzd" class="one">
+            <option value="">点击打分</option>
+            <option value="0">根据销售与店长讨论制定出货补货规范</option>
+            <option value="1">简单说明</option>
+            <option value="2">简单口头指导</option>
+            <option value="3">未进行指导</option>
+        </select>
+    </label>
+    <label>
+        <span>督导/区域经理店铺管理指导</span>
+        <select name="" id="dpglzd" class="one">
+            <option value="">点击打分</option>
+            <option value="0">为店铺制定适度的管理制度</option>
+            <option value="1">举例说明</option>
+            <option value="2">简单口头指导</option>
+            <option value="3">为进行指导</option>
+        </select>
+    </label>
+    <button class="button">提交</button>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(".button").on("touchend",function(){
+        var jlbx=$("#jlbx").val();
+        var jlbxscore=$("#jlbxscore").val();
+        var jlclzd=$("#jlclzd").val();
+        var jlfwzd=$("#jlfwzd").val();
+        var dpbhzd=$("#dpbhzd").val();
+        var dpglzd=$("#dpglzd").val();
+        var d=[];
+        d=[jlbx,jlbxscore,jlclzd,jlfwzd,dpbhzd,dpglzd];
+        sessionStorage.d=d;
+        var a=sessionStorage.a;
+        var b=sessionStorage.b;
+        var c=sessionStorage.c;
+        var d=sessionStorage.d;
+        var stu={
+            studentone:a,
+            studenttwo:b,
+            studentthree:c,
+            studentfour:d,
+        }
+        console.log(stu)
+        $.ajax({
+            url:"{php echo $this->createMobileUrl('feedback',array('op'=>'opening_feedback'));}",
+            data:{"student":"123"},
+            dataType:"json",
+            type:"post",
+            success:function(data){
+                console.log(data);
+//                if(data==1){
+//                    window.location.href="www.chipshare.net/we7/app/index.php?i=19&c=entry&op=myTing&do=feedback&m=lwx_helloting";
+//                }
+            }
+        })
+
+    });
+</script>

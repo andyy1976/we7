@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>开业满意度评分表</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            -webkit-appearance: none; //去掉浏览器默认样式
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            -webkit-touch-callout: none;
+            box-sizing: border-box;
+        }
+    </style>
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                recalc = function () {
+                    var clientWidth = docEl.clientWidth;
+                    if (!clientWidth) return;
+                    if(clientWidth>=750){
+                        // 这里的640 取决于设计稿的宽度
+                        docEl.style.fontSize = '100px';
+                    }else{
+                        docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+                    }
+                };
+
+            if (!doc.addEventListener) return;recalc();
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+    <link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/opening2.css">
+</head>
+<body>
+    <h1>人员培训2/4</h1>
+    <label>
+        <span>店铺图纸及道具制作完成时间</span>
+        <select name="" id="finishtime" class="one">
+            <option value="100">点击打分</option>
+            <option value="1">装修开业充分</option>
+            <option value="2">装修开业仓促</option>
+            <option value="3">开业时尚有道具未完成</option>
+        </select>
+    </label>
+    <label>
+        <span>店铺图纸及道具制作完成打分</span>
+        <select name="" id="finishtimescore" class="one">
+            <option value="100">点击打分</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </label>
+    <label>
+        <span>人员培训</span>
+        <select name="" id="peixun" class="one">
+            <option value="100">点击打分</option>
+            <option value="1">全部参加培训</option>
+            <option value="2">50%以上参加培训</option>
+            <option value="3">50%以下参加培训</option>
+        </select>
+    </label>
+    <label>
+        <span>人员培训打分</span>
+        <select name="" id="peixunscore" class="one">
+            <option value="100">点击打分</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+            <option value="10">10</option>
+        </select>
+    </label>
+    <button class="button">下一步</button>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(".button").on("touchend",function(){
+        var finishtime=$("#finishtime").val();
+        var finishtimescore=$("#finishtimescore").val();
+        var peixun=$("#peixun").val();
+        var peixunscore=$("#peixunscore").val();
+        var b=[];
+
+        if(finishtime=="100"||finishtimescore=="100"||peixun=="100"||peixunscore=="100"){
+            $(this).attr("disabled",true);
+            alert("请完善信息");
+            return;
+        }
+
+        b=[finishtime,finishtimescore,peixun,peixunscore];
+        sessionStorage.b=b;
+        window.location.href="http://h5.lwest.cn/we7/app/index.php?i=3&c=entry&op=opening3&do=feedback&m=lwx_helloting";
+    })
+</script>

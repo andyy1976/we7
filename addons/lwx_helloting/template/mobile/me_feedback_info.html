@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>我的反馈</title>
+	<link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+	
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/me.min.css">
+	<style>
+		a.look{
+			position: absolute;
+			bottom: 5px;
+			right: 10px;
+		}
+	</style>
+</head>
+<body>
+	<!-- head layout -->
+
+	<div class="ih-box ih-box__info">
+		<div class="ih-box ih-box__other">
+			<div class="ih-box__item">
+				<div class="ih-box__hd">
+					<div class="ih-hd__title">{$title}</div>
+					<div class="ih-hd__time">{php echo date('Y-m-d',$feedback['createtime']);}</div>
+				</div>
+				<div class="ih-box__bd">
+					{if $type == 1}
+						<div>年份:{$feedback['year']}年;季度:{if $feedback['season'] == 1}春{elseif $feedback['season'] == 2}夏{elseif $feedback['season'] == 3}秋{elseif $feedback['season'] == 4}冬{/if}</div>
+						<div>服装质量:{$feedback['quality']}分;季度款式:{$feedback['style']}分;销售情况:{$feedback['status']}分;</div>
+						<!--{loop $feedback['problem'] $pro}
+						{$pro['text']}
+						<img src="http://h5.lwest.cn/we7/attachment/lwx_helloting/{$pro['img']}">{$pro['img']}
+						{/loop}-->
+					{elseif $type == 2}
+						<div>店铺名称:{$feedback['shopname']};开业时间:{$feedback['opentime']}</div>
+						<div>服装质量:{$feedback['quality']}分;季度款式:{$feedback['style']}分;销售情况:{$feedback['status']}分;</div>
+					{elseif $type == 3}
+						<div>店铺名称:{$feedback['shopname']};开业时间:{$feedback['opentime']}</div>
+						<div>服装质量:{$feedback['quality']}分;季度款式:{$feedback['style']}分;销售情况:{$feedback['status']}分;</div>
+						{loop $feedback['problem'] $pro}
+						{$pro['text']}
+						{$pro['img']}
+						{/loop}
+					{elseif $type == 4}
+						{loop $feedback['problem'] $pro}
+						{$pro['text']}
+						{$pro['img']}
+						{/loop}
+					{/if}
+					<a class="look" href="./index.php?i=3&c=entry&op=myfeedbackxq&do=person&m=lwx_helloting&id={$id}&type={$type}">查看详情</a>
+				</div>
+				<!--<div class="ih-box__ft">-->
+					<!--<span class="js-btn">展开</span>-->
+				<!--</div>-->
+			</div>
+			<div class="ih-box__content" style="padding-bottom: 50px;">
+				{if count($replylist) == 0}
+				<div class="ih-box__warning">
+					<div class="ih-box__bd">
+					  抱歉，您的反馈未得到官方回复，请耐心等候。
+					</div>
+				</div>
+				{/if}
+				{loop $replylist $reply}
+			      {if $reply["status"] == 1}
+			      <div class="ih-box__warning">
+			      
+			        <div class="ih-box__bd">
+			         {php echo date('Y-m-d',$reply['createtime']);}
+			        </div>
+			      </div>
+			      <div class="ih-box__message">
+			        <div class="ih-message__item">
+			          <div class="ih-message__fd">
+			            <img src="../addons/lwx_helloting/template/mobile/public/images/logo.png" alt="">
+			          </div>
+			          <div class="ih-message__bd">
+			            <div class="ih-message__bd_bg">
+			            {$reply['content']}
+			            </div>
+			          </div>
+			        </div>
+			      </div>
+			      {else}
+					<div class="ih-box__warning">
+					<div class="ih-box__bd">
+					 {php echo date('Y-m-d',$reply['createtime']);}
+					</div>
+					</div>
+
+					<div class="ih-box__message ih-box__message_me">
+					    <div class="ih-message__item">
+					      <div class="ih-message__bd">
+					        <div class="ih-message__bd_bg">
+					           {$reply['content']}
+					        </div>
+					      </div>
+					      <div class="ih-message__ft">
+					        <img src="{$avatar}" alt="">
+					      </div>
+					    </div>
+					</div>
+			      {/if}
+	      		{/loop}
+			</div>
+			
+		</div>
+
+    <div class="ih-eidt">
+			<input class="js-text" type="text" placeholder="说点什么......">
+			<div class="ih-eidt__ft">
+				<!-- <div class="ih-icon"><img src="../addons/lwx_helloting/template/mobile/public/images/common_btn_expression.png" alt=""></div> -->
+				<div class="ih-tap__fb js-comment" style="padding: 0 0 0 10px;color: #e96c68;">发布</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 提示框 -->
+	<div class="ih-dialog__box">
+		<div class="ih-mask"></div>
+		<div class="ih-dialog">
+			<div class="ih-dialog__hd">
+				<div class="ih-dialog__title">
+					提示
+				</div>
+			</div>
+			<div class="ih-dialog__bd">
+				提示内容
+			</div>
+			<div class="ih-dialog__ft">
+				<div class="ih-btn__box">
+					<div class="ih-btn ih-dialog__ok" style="color:#e96c68">确定</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+
+	
+<script>
+	;(function($) {
+		// 判断显示更多
+		var _boxHeight = $(".ih-box__item .ih-box__bd").height();
+		if (_boxHeight < 102) {
+			 $(".ih-box__item .ih-box__ft").hide();
+		}
+
+		// 更多展开
+//		$(".ih-box__ft").on("tap", ".js-btn", function() {
+//			var _thisbd = $(this).parent(".ih-box__ft").siblings(".ih-box__bd");
+//			if (_thisbd.hasClass("active")) {
+//				_thisbd.removeClass("active");
+//			} else {
+//				_thisbd.addClass("active");
+//			}
+//		});
+
+		// 判断是否可以发送反馈
+		var ftnum = "{php echo count($replylist)}";
+		if (ftnum == "0") {
+			$(".js-text").attr("disabled", "disabled");
+		} else {
+			// 发送反馈
+			$(".js-comment").on("click", function() {
+				var content = $.trim($(".js-text").val());
+				if (content == "") {
+					ih.dialogAlert(null, "发布内容不能为空");
+					return false;
+				}
+
+				$.ajax({
+					url: "{php echo $this->createMobileUrl('person',array('op'=>'addreplyfeedback'));}",
+					type: "post",
+					data: {
+						id: {$id},
+						type: {$type},
+						content
+					},
+					dataType: 'json',
+					success: function(result) {
+						if (result == 1) {
+							var html = '<div class="ih-box__warning">'
+								+'<div class="ih-box__bd">'+new Date().format("yyyy-MM-dd")+'</div></div>'
+								+'<div class="ih-box__message ih-box__message_me"><div class="ih-message__item">'
+								+'<div class="ih-message__bd"><div class="ih-message__bd_bg">'+content+'</div></div>'
+								+'<div class="ih-message__ft"><img src="{$avatar}" alt=""></div></div></div>';
+
+								$(".ih-box__content").append(html);
+						}
+					}
+				})
+			});
+		}
+
+
+	})(Zepto)
+</script>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>帮助与反馈</title>
+	<link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+	
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/set.min.css">
+
+</head>
+<body>
+	<!-- head layout -->
+<div class="ih-box ih-box__sethelp">
+  <div class="weui-search-bar weui-search-bar_focusing" id="searchBar">
+      <form class="weui-search-bar__form">
+          <div class="weui-search-bar__box">
+              <i class="weui-icon-search"></i>
+              <input type="search" class="weui-search-bar__input" id="searchInput" placeholder="搜索" required="">
+              <a href="javascript:" class="weui-icon-clear" id="searchClear"></a>
+          </div>
+          <label class="weui-search-bar__label" id="searchText">
+              <i class="weui-icon-search"></i>
+              <span>搜索</span>
+          </label>
+      </form>
+      <a href="javascript:" class="weui-search-bar__cancel-btn" id="searchCancel">取消</a>
+  </div>
+
+  <div class="ih-box__title">常见问题</div>
+  <section>
+		<div class="section-box">
+			<!-- <div class="section-list__link">打赏获得的金额怎么提现</div> -->
+			<div class="section-list__link">为什么发送不了视频</div>
+			<div class="section-list__link">忘记密码怎么办</div>
+		</div>
+	</section>
+</div>
+<footer class="ih-box__footer">
+  <div class="ih-footer__sethelp">
+    <div class="ih-footer__fd"><img src="../addons/lwx_helloting/template/mobile/public/images/comment.png" alt=""></div>
+    <div class="ih-footer__bd ih-href" data-href="{php echo $this->createMobileUrl('person',array('op'=>'set_feedback'));}">意见反馈</div>
+  </div>
+</footer>
+
+
+	
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+
+	
+<script>
+  ;(function($) {
+
+  })(Zepto)
+</script>
+
+</body>
+</html>

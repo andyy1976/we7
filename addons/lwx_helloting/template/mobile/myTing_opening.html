@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>开业满意度评分表</title>
+	<link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+	
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/ting.min.css">
+
+</head>
+<body>
+	<!-- head layout -->
+	
+
+	
+<div class="ting-box">
+	<section>
+		<div class="section-box feedback-box">
+			<div class="section-list__link">
+				<label class="weui-label">店铺名</label>
+				<input class="weui-input js-shop" type="text" placeholder="请输入店铺名">
+				<!-- <input class="ih-input" type="text" placeholder="请输入店铺名"> -->
+			</div>
+		</div>
+		<div class="section-box feedback-box">
+			<div class="section-list__link">
+				<label class="weui-label">开业时间</label>
+				<input class="weui-input js-time" type="date" value="">
+			</div>
+		</div>
+		<div class="title-box">打个分吧</div>
+		<div class="section-box feedback-box">
+			<div class="section-list__link">
+				<label class="weui-label">服装质量</label>
+				<ul class="mark js-zl" data-item="0">
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="section-box feedback-box">
+			<div class="section-list__link">
+				<label class="weui-label">季度款式</label>
+				<ul class="mark js-ks" data-item="0">
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="section-box feedback-box">
+			<div class="section-list__link">
+				<label class="weui-label">销售情况</label>
+				<ul class="mark js-xs" data-item="0">
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+					<li class="mark-item"></li>
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<div class="ih-xxx__box">
+		<div class="ih-btn__red">提交</div>
+	</div>
+</div> 
+	<div class="ih-dialog__box">
+		<div class="ih-mask"></div>
+		<div class="ih-dialog">
+			<div class="ih-dialog__hd">
+				<div class="ih-dialog__title">
+					提示
+				</div>
+			</div>
+			<div class="ih-dialog__bd">
+				提示内容
+			</div>
+			<div class="ih-dialog__ft">
+				<div class="ih-btn__box">
+					<div class="ih-btn ih-dialog__ok" style="color: #e96c68;">确定</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+	
+	<script type="text/javascript">
+		;(function($) {
+			$(".ih-xxx__box").on("tap", ".ih-btn__red", function() {
+
+				var shopname = $.trim($(".js-shop").val());
+				var opening = $.trim($(".js-time").val());
+				var quality = $(".js-zl").data("item");
+				if (quality == "0") {
+					ih.dialogAlert(null, "请选择您的评分");
+					return false;
+				}
+				var style = $(".js-ks").data("item");
+				if (style == "0") {
+					ih.dialogAlert(null, "请选择您的评分");
+					return false;
+				}
+				var status = $(".js-xs").data("item");
+				if (status == "0") {
+					ih.dialogAlert(null, "请选择您的评分");
+					return false;
+				}
+
+				if (shopname == "") {
+					ih.dialogAlert(null, "店铺名不能为空");
+					return false;
+				}
+
+				if (opening == "") {
+					ih.dialogAlert(null, "开业时间不能为空");
+					return false;
+				}
+
+				$.ajax({
+					url: "{php echo $this->createMobileUrl('Feedback',array('op'=>'opening_feedback'));}",
+					data: {
+						shopname,
+						opening,
+						quality,
+						style,
+						status
+					},
+					success: function(result) {
+						if (result == 1) {
+							ih.dialogAlert(null, "提交成功", function() {
+								localStorage.removeItem("newgoodes");
+								location.href = "{php echo $this->createMobileUrl('feedback', array('op'=>'myTing'));}";
+							});
+						}
+					}
+
+				});
+
+			});
+		})(Zepto)
+	</script>
+	
+
+
+</body>
+</html>

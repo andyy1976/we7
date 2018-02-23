@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+	<meta name="format-detection" content="telephone=no, email=no" />
+	<title>分类列表</title>
+	<link href="//cdn.bootcss.com/weui/1.1.1/style/weui.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/style.min.css">
+	
+<link rel="stylesheet" href="../addons/lwx_helloting/template/mobile/public/css/train.min.css">
+
+</head>
+<body style="width:100%;height:100%;">
+	<!-- head layout -->
+	
+
+	
+<div class="ih-box ih-box__train_list" style="width:100%;height:auto;">
+	{loop $themelist $theme}
+  <div class="ih-box__train_item ih-href" data-href="{php echo $this->createMobileUrl('feedback',array('op'=>'train_list','id'=>$theme['id'],'type'=>'ccate'));}" 
+  style="width:48%;background:url(http://www.chipshare.cn/hellot_admin/thinkphp3/Public/uploads/{$theme['thumb']}) no-repeat 50% 50%">
+    <div class="ih-box__train_title" style="color: #fff">{$theme['name']}</div>
+  </div>
+	{/loop}
+ 
+</div>
+
+
+	
+    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+	<script src="https://cdn.bootcss.com/touchjs/0.2.14/touch.min.js"></script>
+	<script src="../addons/lwx_helloting/template/mobile/public/js/common.js"></script>
+
+	
+<script>
+  ;(function($) {
+
+  })(Zepto)
+</script>
+
+</body>
+</html>
